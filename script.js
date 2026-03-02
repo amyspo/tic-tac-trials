@@ -2,13 +2,19 @@ const gameBoard = document.querySelector(".game-board");
 
 let clickNumber = 0;
 
+let bluePlayerArray = [];
+let redPlayerArray = [];
+
 gameBoard.addEventListener("click", function (event) {
-  event.target.innerText = getSymbol();
+  event.target.innerText = assignSymbol();
   clickNumber++;
   changeColors(event);
+  getButtonNum(event);
+  detectBugs();
+  checkWin();
 });
 
-function getSymbol() {
+function assignSymbol() {
   if (clickNumber % 2 === 0) {
     return "O";
   }
@@ -38,9 +44,99 @@ function reset() {
     }
   });
   clickNumber = 0;
+  bluePlayerArray = [];
+  redPlayerArray = [];
 }
 
 function checkWin() {
-  //TODO win or draw condition
-  //TODO alert? changing colors?
+  const horizontalWin1 = [0, 1, 2];
+  const horizontalWin2 = [3, 4, 5];
+  const horizontalWin3 = [6, 7, 8];
+
+  if (bluePlayerArray.length >= 3) {
+    bluePlayerArray.sort();
+    redPlayerArray.sort();
+    let firstRowCounter = 0;
+
+    for (let i = 0; i <= 2; i++) {
+      if (
+        bluePlayerArray[i] === horizontalWin1[i] ||
+        redPlayerArray[i] === horizontalWin1[i]
+      ) {
+        firstRowCounter++;
+      }
+    }
+    if (firstRowCounter === 3) {
+      alert("someone won!");
+    }
+  }
+
+  if (bluePlayerArray.length >= 3) {
+    bluePlayerArray.sort();
+    redPlayerArray.sort();
+    let secondRowCounter = 0;
+    console.log("second if");
+
+    for (let i = 0; i <= 2; i++) {
+      if (
+        bluePlayerArray[i] === horizontalWin2[i] ||
+        redPlayerArray[i] === horizontalWin2[i]
+      ) {
+        secondRowCounter++;
+        console.log(secondRowCounter);
+      }
+    }
+    if (secondRowCounter === 3) {
+      alert("someone won!");
+    }
+  }
+
+  if (bluePlayerArray.length >= 3) {
+    bluePlayerArray.sort();
+    redPlayerArray.sort();
+    let thirdRowCounter = 0;
+    console.log("third if");
+    console.log(redPlayerArray, bluePlayerArray);
+
+    if (redPlayerArray.length > 3) {
+      redPlayerArray.slice(1);
+    }
+
+    if (bluePlayerArray.length > 3) {
+      bluePlayerArray.slice(1);
+    }
+
+    for (let i = 0; i <= 2; i++) {
+      if (
+        bluePlayerArray[i] === horizontalWin3[i] ||
+        redPlayerArray[i] === horizontalWin3[i]
+      ) {
+        thirdRowCounter++;
+        console.log(thirdRowCounter);
+      }
+    }
+    if (thirdRowCounter === 3) {
+      alert("someone won!");
+    }
+  }
+}
+
+function getButtonNum(num) {
+  if (clickNumber % 2 === 0) {
+    redPlayerArray.push(parseInt(num.target.classList[0]));
+  } else {
+    bluePlayerArray.push(parseInt(num.target.classList[0]));
+  }
+}
+
+function detectBugs() {
+  console
+    .log
+    // "click number:",
+    // clickNumber,
+    // "blue player:",
+    // bluePlayerArray,
+    // "red player:",
+    // redPlayerArray,
+    ();
 }
