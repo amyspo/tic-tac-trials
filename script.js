@@ -51,74 +51,34 @@ function reset() {
 }
 
 function checkWin() {
-  const horizontalWin1 = [0, 1, 2];
-  const horizontalWin2 = [3, 4, 5];
-  const horizontalWin3 = [6, 7, 8];
-
-  if (bluePlayerArray.length >= 3) {
-    bluePlayerArray.sort();
-    redPlayerArray.sort();
-    let firstRowCounter = 0;
-
-    for (let i = 0; i <= 2; i++) {
+  const winningCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  if (bluePlayerArray.length < 3) {
+    //wait
+  } else {
+    for (let i = 0; i <= 7; i++) {
       if (
-        bluePlayerArray[i] === horizontalWin1[i] ||
-        redPlayerArray[i] === horizontalWin1[i]
+        bluePlayerArray.includes(winningCombos[i][0]) &&
+        bluePlayerArray.includes(winningCombos[i][1]) &&
+        bluePlayerArray.includes(winningCombos[i][2])
       ) {
-        firstRowCounter++;
+        alert("blue won");
       }
-    }
-    if (firstRowCounter === 3) {
-      alert("someone won!");
-    }
-  }
-
-  if (bluePlayerArray.length >= 3) {
-    bluePlayerArray.sort();
-    redPlayerArray.sort();
-    let secondRowCounter = 0;
-    console.log("second if");
-
-    for (let i = 0; i <= 2; i++) {
       if (
-        bluePlayerArray[i] === horizontalWin2[i] ||
-        redPlayerArray[i] === horizontalWin2[i]
+        redPlayerArray.includes(winningCombos[i][0]) &&
+        redPlayerArray.includes(winningCombos[i][1]) &&
+        redPlayerArray.includes(winningCombos[i][2])
       ) {
-        secondRowCounter++;
-        console.log(secondRowCounter);
+        alert("red won");
       }
-    }
-    if (secondRowCounter === 3) {
-      alert("someone won!");
-    }
-  }
-
-  if (bluePlayerArray.length >= 3) {
-    bluePlayerArray.sort();
-    redPlayerArray.sort();
-    let thirdRowCounter = 0;
-    console.log("third if");
-    console.log(redPlayerArray, bluePlayerArray);
-
-    if (redPlayerArray.length > 3) {
-      redPlayerArray.slice(1);
-    }
-
-    if (bluePlayerArray.length > 3) {
-      bluePlayerArray.slice(1);
-    }
-
-    for (let i = 0; i <= 2; i++) {
-      if (
-        bluePlayerArray[i] === horizontalWin3[i] ||
-        redPlayerArray[i] === horizontalWin3[i]
-      ) {
-        thirdRowCounter++;
-        console.log(thirdRowCounter);
-      }
-    }
-    if (thirdRowCounter === 3) {
-      alert("someone won!");
     }
   }
 }
