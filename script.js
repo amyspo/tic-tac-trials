@@ -6,12 +6,14 @@ let bluePlayerArray = [];
 let redPlayerArray = [];
 
 gameBoard.addEventListener("click", function (event) {
-  event.target.innerText = assignSymbol();
-  clickNumber++;
-  changeColors(event);
-  getButtonNum(event);
-  detectBugs();
-  checkWin();
+  if (event.target.innerText === "") {
+    event.target.innerText = assignSymbol();
+    clickNumber++;
+    changeColors(event);
+    getButtonNum(event);
+    detectBugs();
+    checkWin();
+  }
 });
 
 function assignSymbol() {

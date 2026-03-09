@@ -24,6 +24,10 @@ h1 {
     font-weight: 100;
 }
 
+button:not(.red-player, .blue-player):hover {
+    transform: scale(1.05);
+}
+
 .field {
     height: 100px;
     width: 100px;
